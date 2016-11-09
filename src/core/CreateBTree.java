@@ -230,6 +230,28 @@ public class CreateBTree {
 
 		System.out.println(root2.data);
 	}
+	boolean checkBST(Node root) {
+		if(root == null){
+			return true;
+		}else{
+			return checkBST(root,-1,100000);
+		}
+
+	}
+	private boolean checkBST(Node root, int lowerBound, int upperBound) {
+		if(root == null){
+			return true;
+		}else{
+			if(temp.containsKey(root.data)){
+				return false;
+			}
+			temp.put(root.data, null);
+			if((root.data > lowerBound && root.data < upperBound) && checkBST(root.left,lowerBound,root.data) && checkBST(root.right,root.data,upperBound) ){
+				return true;
+			}
+		}
+		return false;
+	}
 }
 class Node{
 	Node leftNode;
